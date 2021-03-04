@@ -1,9 +1,37 @@
 var express = require('express');
 var router = express.Router();
 
+const https = require('https');
+
+var jsonHandler = require('./api/jsonHandler')
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  https.get('https://technology-api.ndc.nasa.gov/api/patent', (resp) => {
+    let rawDataBuffer = '';
+
+    // A chunk of data has been received.
+    resp.on('data', (chunk) => {
+      rawDataBuffer += chunk;
+    });
+
+    resp.on('end', () => {
+      let jsonData = JSON.parse(rawDataBuffer);
+      let metrics = jsonHandler.GetMetrics(jsonData);
+
+      res.render('index', { 
+        title: 'NTTS Coding Excercise',
+        categories: metrics.categories,
+        centers: metrics.centers
+      });
+    });
+
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+
+
+  // res.render('index', { title: 'NTTS Coding Excercise' });
 });
 
 module.exports = router;

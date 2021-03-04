@@ -1,5 +1,36 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  include components/header
+
+  if categories
+    p categories!
+    each val, key in categories 
+      p #{key} : #{val}
+
+  p -----------------------------------------------------
+  if centers 
+    p centers! 
+    each val, key in centers 
+      p #{key} : #{val}
+
+
+
+
+    //- each key, val in centers
+    //-   p #{key} : #{val}
+    //-   p ID: #{val[0]}
+    //-   p REFERENCE NUMBER: #{val[1]}
+    //-   p TITLE: #{val[2]}
+    //-   p ABSTRACT: #{val[3]}
+    //-   p CLIENT RECORD ID: #{val[4]}
+    //-   p CATEGORY: #{val[5]}
+    //-   p RELEASE TYPE: #{val[6]}
+    //-   p CATALOG NOTE: #{val[7]}
+    //-   p SW URL: #{val[8]}
+    //-   p CENTER: #{val[9]}
+    //-   p IMAGE URL: #{val[10]}
+    //-   p SUBCATEGORY: #{val[11]}
+    //-   p ----------------------------------------------------------      
+
+  include components/footer
