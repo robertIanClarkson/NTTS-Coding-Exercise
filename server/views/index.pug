@@ -2,17 +2,20 @@ extends layout
 
 block content
   include components/header
+  canvas#categories-bar-chart
+  canvas#centers-pie-chart
 
-  if categories
-    p categories!
-    each val, key in categories 
-      p #{key} : #{val}
+  //- if categories
+  //-   p categories!
+  //-   each val, key in categories 
+  //-     p #{key} : #{val}
 
-  p -----------------------------------------------------
-  if centers 
-    p centers! 
-    each val, key in centers 
-      p #{key} : #{val}
+  //-   canvas#categories-bar-chart(height='400px' )
+  //- p -----------------------------------------------------
+  //- if centers 
+  //-   p centers! 
+  //-   each val, key in centers 
+  //-     p #{key} : #{val}
 
 
 
@@ -34,3 +37,5 @@ block content
     //-   p ----------------------------------------------------------      
 
   include components/footer
+
+  script(src="/javascripts/graphs.js" val="hello")
