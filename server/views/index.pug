@@ -1,9 +1,13 @@
 extends layout
 
 block content
-  include components/header
-  canvas#categories-bar-chart
-  canvas#centers-pie-chart
+  .container-sm
+    h1#title Patent Statistics
+  .container-sm
+    canvas#categories-bar-chart
+  hr
+  .container-sm
+    canvas#centers-pie-chart
 
   //- if categories
   //-   p categories!
@@ -35,7 +39,5 @@ block content
     //-   p IMAGE URL: #{val[10]}
     //-   p SUBCATEGORY: #{val[11]}
     //-   p ----------------------------------------------------------      
-
-  include components/footer
 
   script(src="/javascripts/graphs.js" val="hello")
