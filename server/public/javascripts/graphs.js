@@ -99,7 +99,7 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
     }
   }
 
-  Chart.defaults.global.animation.duration = 4000;
+  Chart.defaults.global.animation.duration = 2000;
 
   var bar_ctx = document.getElementById(elementId).getContext('2d');
   backgroundColors = []
@@ -131,23 +131,36 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
       title: {
         display: true,
         text: title,
+        fontFamily: "'Raleway', sans-serif",
         fontColor: "white",
-        fontSize: 36,
-        fontFamily: "'Roboto'"
+        fontSize: 36
       },
       legend: {
         display: false
+      },
+      tooltips: {
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 1,
+        titleFontFamily: "'Roboto Condensed', sans-serif",
+        titleFontSize: 18,
+        titleFontColor: "black",
+        bodyFontFamily: "'Roboto Condensed', sans-serif",
+        bodyFontSize: 14,
+        bodyFontColor: "black"
       },
       scales: {
         xAxes: [{
           display: true,
           ticks: {
+            fontFamily: "'Roboto Condensed', sans-serif",
             fontColor: "white",
             fontSize: 18
           },
           scaleLabel: {
             display: true,
             labelString: xlabel,
+            fontFamily: "'Roboto Condensed', sans-serif",
             fontColor: "#ba0011",
             fontSize: 24
           },
@@ -158,12 +171,14 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
         yAxes: [{
           display: true,
           ticks: {
+            fontFamily: "'Roboto Condensed', sans-serif",
             fontColor: "white",
             fontSize: 18
           },
           scaleLabel: {
             display: true,
             labelString: yLabel,
+            fontFamily: "'Roboto Condensed', sans-serif",
             fontColor: "#ba0011",
             fontSize: 24,
           },
@@ -199,6 +214,7 @@ function makePie(elementId, title, labels, values) {
 
   Chart.defaults.global.animation.duration = 4000;
 
+
   pie_ctx = document.getElementById(elementId).getContext('2d');
   backgroundColors = []
   for(let i = 0; i < labels.length; i++) {
@@ -228,15 +244,24 @@ function makePie(elementId, title, labels, values) {
       title: {
         display: true,
         text: title,
+        fontFamily: "'Raleway', sans-serif",
         fontColor: "white",
         fontSize: 36,
-        fontFamily: "'Roboto'"
       },
       legend: {
         labels: {
+          fontFamily: "'Roboto Condensed', sans-serif",
           fontColor: 'white',
           fontSize: 18
         }
+      },
+      tooltips: {
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 1,
+        bodyFontFamily: "'Roboto Condensed', sans-serif",
+        bodyFontSize: 18,
+        bodyFontColor: "black"
       }
     }
   })
