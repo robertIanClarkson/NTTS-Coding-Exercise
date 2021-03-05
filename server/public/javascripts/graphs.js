@@ -132,7 +132,8 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
         display: true,
         text: title,
         fontColor: "white",
-        fontSize: 36
+        fontSize: 36,
+        fontFamily: "'Roboto'"
       },
       legend: {
         display: false
@@ -201,7 +202,7 @@ function makePie(elementId, title, labels, values) {
   pie_ctx = document.getElementById(elementId).getContext('2d');
   backgroundColors = []
   for(let i = 0; i < labels.length; i++) {
-    backgroundColor = pie_ctx.createRadialGradient(110,90,30, 100,100,70);
+    backgroundColor = pie_ctx.createLinearGradient(0, 0, 0, 00);
     backgroundColor.addColorStop(0.0, barPattern[i])
     backgroundColor.addColorStop(0.5, barPattern[i+1])
     backgroundColor.addColorStop(1.0, barPattern[i+2])
@@ -217,7 +218,7 @@ function makePie(elementId, title, labels, values) {
         backgroundColor: piePattern,
         borderColor: "black",
         hoverBorderColor: "white",
-        hoverBorderWidth: 8,
+        hoverBorderWidth: 4
       }],
       labels: labels
     },
@@ -228,7 +229,8 @@ function makePie(elementId, title, labels, values) {
         display: true,
         text: title,
         fontColor: "white",
-        fontSize: 36
+        fontSize: 36,
+        fontFamily: "'Roboto'"
       },
       legend: {
         labels: {
