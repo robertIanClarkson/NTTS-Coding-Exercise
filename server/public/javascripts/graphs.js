@@ -82,10 +82,26 @@ function getMetrics(metrics) {
 }
 
 function makeBar(elementId, title, xlabel, yLabel, labels, values) {
-  Chart.defaults.global.animation.duration = 4000;
-  
-  var bar_ctx = document.getElementById(elementId).getContext('2d');
 
+  function barClickEvent(event, array){
+    if(array.length != 0){
+      let index = array[0]._index;
+      let label = labels[index];
+      let search = "https://technology.nasa.gov/search/aw/patent/" + label;
+      var win = window.open(search, '_blank');
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+    }
+  }
+
+  Chart.defaults.global.animation.duration = 4000;
+
+  var bar_ctx = document.getElementById(elementId).getContext('2d');
   backgroundColors = []
   for(let i = 0; i < labels.length; i++) {
     backgroundColor = bar_ctx.createLinearGradient(0, 0, 0, 1000);
@@ -110,6 +126,7 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
       }]
     },
     options: {
+      onClick: barClickEvent,
       responsive: true,
       title: {
         display: true,
@@ -160,10 +177,28 @@ function makeBar(elementId, title, xlabel, yLabel, labels, values) {
 }
 
 function makePie(elementId, title, labels, values) {
+  function pieClickEvent(event, array) {
+    if(array.length != 0) {
+      let index = array[0]._index;
+      let label = labels[index];
+      let term = prompt("Please enter a search term", "Engines");
+      if (term != null && term != "") {
+        let search = "https://technology.nasa.gov/search/" + label.toLowerCase() + "/patent/" + term;
+        var win = window.open(search, '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+      } 
+    }
+  }
+
   Chart.defaults.global.animation.duration = 4000;
 
   pie_ctx = document.getElementById(elementId).getContext('2d');
-
   backgroundColors = []
   for(let i = 0; i < labels.length; i++) {
     backgroundColor = pie_ctx.createRadialGradient(110,90,30, 100,100,70);
@@ -180,12 +215,15 @@ function makePie(elementId, title, labels, values) {
       datasets: [{
         data: values,
         backgroundColor: piePattern,
-        label: 'Dataset 1'
+        borderColor: "black",
+        hoverBorderColor: "white",
+        hoverBorderWidth: 8,
       }],
       labels: labels
     },
     options: {
       responsive: true,
+      onClick: pieClickEvent,
       title: {
         display: true,
         text: title,
@@ -203,6 +241,7 @@ function makePie(elementId, title, labels, values) {
 }
 
 $(document).ready(function() {
+
   getMetrics(["Categories, Centers"])
     .then((data) => {
       let categories = data.metrics.categories
@@ -222,6 +261,7 @@ $(document).ready(function() {
         , "Number Of Patents Per NASA Field Center"
         , centerLabels
         , centerValues)
+        
     })
     .catch(err => {
       console.log(err)

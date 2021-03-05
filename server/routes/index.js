@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/metrics', function(req, res, next) {
   
-  console.log(req.body['metrics[]'])
+  // console.log(req.body['metrics[]'])
   
   https.get('https://technology-api.ndc.nasa.gov/api/patent', (resp) => {
     let rawDataBuffer = '';

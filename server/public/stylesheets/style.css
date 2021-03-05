@@ -12,15 +12,11 @@ h1 {
 }
 
 hr {
-  /* background-color: #FC3D21; */
   background-color: white;
 }
 
-a {
-  color: #00B7FF;
-}
-
 #title {
+  padding-top: 50px;
   text-align: center;
   padding-bottom: 3rem;
 }
@@ -28,7 +24,13 @@ a {
 #footer h5 {
   text-align: center;
 }
+
 #footer h6 {
   text-align: center;
   font-weight: 100;
+}
+
+#graph {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
