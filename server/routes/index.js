@@ -8,7 +8,7 @@ const jsonHandler = require('./api/jsonHandler')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { 
-    title: 'NTTS Coding Excercise'
+    title: 'NTTS Coding Exercise'
   });
 });
 
