@@ -50,11 +50,11 @@ function getPatentMetrics() {
         if(status == 'success') {
           resolve(data);
         } else {
-          reject(`Failed POST request for patent metrics: ${status}`);
+          reject("Failed POST request for patent metrics: " + status);
         }
       })
       .catch((err) => {
-        reject(`Failed POST request for patent metrics: ${err}`);
+        reject("Failed POST request for patent metrics: " + JSON.stringify(err));
       });
   });
 }
@@ -317,10 +317,10 @@ $(document).ready(function() {
       } catch(err) {
         let chartContainer = document.getElementById("categories-graph-container")
         let dom = document.createElement("h3");
-        let error = document.createTextNode("Failed to render bar chart -> " + err);
+        let error = document.createTextNode("Failed to render bar chart -> " + JSON.stringify(err));
         dom.appendChild(error);
         chartContainer.appendChild(dom)
-        console.log("Failed to render bar chart -> " + err)
+        console.log("Failed to render bar chart -> " + JSON.stringify(err))
       }
       
       try {
@@ -337,18 +337,18 @@ $(document).ready(function() {
       } catch(err) {
         let chartContainer = document.getElementById("centers-graph-container")
         let dom = document.createElement("h3");
-        let error = document.createTextNode("Failed to render pie chart -> " + err);
+        let error = document.createTextNode("Failed to render pie chart -> " + JSON.stringify(err));
         dom.appendChild(error);
         chartContainer.appendChild(dom)
-        console.log("Failed to render pie chart -> " + err)
+        console.log("Failed to render pie chart -> " + JSON.stringify(err))
       }
     })
     .catch(err => {
       let chartContainer = document.getElementById("categories-graph-container")
       let dom = document.createElement("h3");
-      let error = document.createTextNode("Failed to get patent metrics from server -> " + err);
+      let error = document.createTextNode(err);
       dom.appendChild(error);
       chartContainer.appendChild(dom)
-      console.log("Failed to get patent metrics from server -> " + err)
+      console.log(err)
     })
 });
