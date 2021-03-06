@@ -344,6 +344,11 @@ $(document).ready(function() {
       }
     })
     .catch(err => {
+      let chartContainer = document.getElementById("categories-graph-container")
+      let dom = document.createElement("h3");
+      let error = document.createTextNode("Failed to get patent metrics from server -> " + err);
+      dom.appendChild(error);
+      chartContainer.appendChild(dom)
       console.log("Failed to get patent metrics from server -> " + err)
     })
 });
