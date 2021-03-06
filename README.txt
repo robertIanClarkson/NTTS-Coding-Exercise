@@ -49,7 +49,7 @@ Deployment
 		Start the server from inside the directory 'NTTS-Coding-Exercise/server'
 			$ npm start
 		
-		NOTE: If for any reason 'npm start' fails, Please use
+		NOTE: If for any reason 'npm start' fails, Please use 'npm test' or 'node ./bin/www'
 
 Usage
 	Visit your localhost, port 3000
