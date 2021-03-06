@@ -28,7 +28,7 @@ router.post('/metrics', function(req, res, next) {
     /* Finished getting data from API */
     apiRes.on('end', () => {
       let jsonData = JSON.parse(rawDataBuffer);
-      let metrics = jsonHandler.getMetrics(jsonData);
+      let metrics = jsonHandler.getPatentMetrics(jsonData);
       res.send(metrics);
     });
   }).on("error", (err) => {

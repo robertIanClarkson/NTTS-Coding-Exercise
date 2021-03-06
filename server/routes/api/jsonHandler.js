@@ -3,7 +3,7 @@
  * @param  {JSON} jsonData Data from NTTP API in JSON form.
  * @return {Object} Returns an Object containing the metrics of the NTTP API.
  */
-function getMetrics(jsonData) {
+function getPatentMetrics(jsonData) {
 
   /* Create maps to store frequency */
   let categories = new Map();
@@ -30,5 +30,5 @@ function getMetrics(jsonData) {
 };
 
 module.exports = {
-  getMetrics
+  getPatentMetrics
 }
