@@ -58,7 +58,7 @@ function getPatentMetrics(metrics) {
 }
 
 /**
- * Description: Draws a bar chart to the given <canvas> via 'Chart.js'.
+ * Description: Renders a bar chart to the given <canvas> via 'Chart.js'.
  * @param {string}   elementId HTML id attribute of the <canvas> element we want to target. Example: "my-new-chart".
  * @param {string}   title     Title of the chart. Example: "Number of People Per State".
  * @param {string}   xlabel    Label of the X-Axis. Example: "State" .
@@ -69,7 +69,7 @@ function getPatentMetrics(metrics) {
  * @param {string[]} palette   Color palette of the chart. Example: ["#012345", "#abcdef"].
  *                             NOTE: 'palette' size must be >= to size of "labels" + 2.
  */
-function makeBarChart(elementId, title, xLabel, yLabel, labels, values, palette) {
+function renderBarChart(elementId, title, xLabel, yLabel, labels, values, palette) {
   
   /**
    * Description: Redirects client to NTTP patents page in a new tab with a search of the bar clicked.
@@ -188,7 +188,7 @@ function makeBarChart(elementId, title, xLabel, yLabel, labels, values, palette)
 };
 
 /**
- * Description: Draws a pie chart to the given canvas via Chart.js
+ * Description: Renders a pie chart to the given canvas via Chart.js
  * @param {string}   elementId HTML id attribute of the <canvas> element we want to target. Example: "my-new-chart".
  * @param {string}   title     Title of the chart. Example: "Number of People Per State".
  * @param {string[]} labels    Slices to be used in pie chart. Example: ["California", "Texas"].
@@ -197,7 +197,7 @@ function makeBarChart(elementId, title, xLabel, yLabel, labels, values, palette)
  * @param {string[]} palette   Color palette of the chart. Example: ["#012345", "#abcdef"].
  *                             NOTE: 'palette' size must be >= to size of 'labels'.
  */
-function makePieChart(elementId, title, labels, values, palette) {
+function renderPieChart(elementId, title, labels, values, palette) {
   
   /**
    * Description: Redirects client to NTTP patents page in a new tab with a search of the bar clicked.
@@ -279,7 +279,7 @@ $(document).ready(function() {
       let categories = data.metrics.categories
       let categoryLabels = Object.keys(categories)
       let categoryValues = Object.values(categories)
-      makeBarChart(
+      renderBarChart(
         "categories-bar-chart",
         "Number of Patents Per Portfolio Category",
         "Category",
@@ -292,7 +292,7 @@ $(document).ready(function() {
       let centers = data.metrics.centers
       let centerLabels = Object.keys(centers)
       let centerValues = Object.values(centers)
-      makePieChart(
+      renderPieChart(
         "centers-pie-chart",
         "Number of Patents Per NASA Field Center",
         centerLabels,
