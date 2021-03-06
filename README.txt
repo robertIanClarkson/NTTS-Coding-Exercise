@@ -1,4 +1,4 @@
-NTTS-Coding-Excercise
+NTTS-Coding-Exercise
 
 Author
 	Robert Clarkson
@@ -6,8 +6,28 @@ Author
 	LinkedIn: https://www.linkedin.com/in/robert-clarkson-5856621b7/
 	GitHub: https://github.com/robertIanClarkson 
 
+Indroduction
+	I used ExpressJS because it is easy to run on other people's machines.
+	All you need is 'Node.js' and 'npm' which most people have or can easily install.
+	I decided to keep my project in the regular ExpressJS layout because it is well organized.
+	That being said I created a directory 'submission_files' adjacent to 'server' which holds the files asked for just in case.
+	I also shared the relevant paths below.
+
 Relevant Files
+	server-side
+		NTTS-Coding-Exercise/server/bib/www - file - entry point of application
+		NTTS-Coding-Exercise/server/routes/index.js - file - server-side scripting for HTTP requests
+		NTTS-Coding-Exercise/server/routes/api/jsonHandler.js - file - server-side scripting for handling patent metrics
 	
+	client-side
+		NTTS-Coding-Exercise/server/views/ - directory - all client-side "HTML" components (pug)
+		NTTS-Coding-Exercise/server/views/index.html - file - the rendered HTML file created by pug
+		NTTS-Coding-Exercise/server/public/javascripts/graphs.js - file - client-side jQuery POST request & Chart.js logic 
+		NTTS-Coding-Exercise/server/public/stylesheets/style.css - file - client-side CSS styling for project
+	
+	Just-in-case
+		NTTS-Coding-Exercise/submission_files/ - directory - holds a copy of all the files above + the rendered pug->HTML file
+		NOTE: The application will only run from within the 'server' directory, these files are just for viewing purposes
 
 Deployment
 	Prerequisites
@@ -16,7 +36,7 @@ Deployment
 
 	Installing
 		Travel to the `NTTS-Coding-Excercise` directory in your terminal
-			$ cd NTTS-Coding-Excercise
+			$ cd NTTS-Coding-Exercise
 		
 		Enter the `server` directory
 			$ cd server
@@ -25,7 +45,7 @@ Deployment
 			$ npm install
 			
 	Running
-		Start the server from inside the directory `NTTS-Coding-Excercise/server`
+		Start the server from inside the directory `NTTS-Coding-Exercise/server`
 			$ npm start
 
 Usage
