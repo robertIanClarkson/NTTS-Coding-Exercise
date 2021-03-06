@@ -1,10 +1,15 @@
+/**
+ * Description: get the 'Category' and 'Center' metrics.
+ * @param  {JSON} jsonData Data from NTTP API in JSON form.
+ * @return {Object} Returns an Object containing the metrics of the NTTP API.
+ */
+function getMetrics(jsonData) {
 
-
-function GetMetrics(jsonData) {
-
+  /* Create maps to store frequency */
   let categories = new Map();
   let centers = new Map();
   
+  /* Collect metrics */
   for (i in jsonData.results) {
     let data = jsonData.results[i];
 
@@ -18,10 +23,6 @@ function GetMetrics(jsonData) {
     centers.set(center, center_count ? center_count+1 : 1);
   }
 
-  // return {
-  //   categories: Array.from(categories),
-  //   centers: Array.from(centers)
-  // }
   return {
     categories: Object.fromEntries(categories),
     centers: Object.fromEntries(centers)
@@ -29,5 +30,5 @@ function GetMetrics(jsonData) {
 };
 
 module.exports = {
-  GetMetrics
+  getMetrics
 }

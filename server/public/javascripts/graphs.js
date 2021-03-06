@@ -37,22 +37,22 @@ const pieColorPalette_Centers = [
 
 /**
  * Description: gets patent metrics Object from the NTTP API via POST request to server
- * @param  {string[]} metrics Metrics we want from server. Example: ["Categories, Centers"].
- * @return {Promise<Object>}  On resolved Promise, returns a 'data' Object with organized data gathered. Example: data.metrics.categories.
+ * @return {Promise<Object>}  On resolved Promise, returns a 'metrics' Object with organized data gathered. Example: metrics.categories.
  *                            On rejected Promise, Error is thrown.
  */
-function getPatentMetrics(metrics) {
+function getPatentMetrics() {
   return new Promise((resolve, reject) => {
-    $.post("metrics", { metrics })
+    /* make post request to server for 'metrics' */
+    $.post("metrics")
       .then((data, status) => {
         if(status == 'success') {
           resolve(data);
         } else {
-          reject(`Failed POST request for patent metrics '${metrics}': ${status}`);
+          reject(`Failed POST request for patent metrics: ${status}`);
         }
       })
       .catch((err) => {
-        reject(`Failed POST request for patent metrics '${metrics}': ${err}`);
+        reject(`Failed POST request for patent metrics: ${err}`);
       });
   });
 }
@@ -272,13 +272,16 @@ function renderPieChart(elementId, title, labels, values, palette) {
   });
 };
 
-/* Main Block of file='graph.js' */
+/**
+ * Main Block of file='graph.js'
+ * Description: get patent metrics from the server, then render bar chart for 'categories' and pie chart for 'centers'
+ */
 $(document).ready(function() {
-  getPatentMetrics(["Categories, Centers"])
-    .then((data) => {
-      let categories = data.metrics.categories
-      let categoryLabels = Object.keys(categories)
-      let categoryValues = Object.values(categories)
+  getPatentMetrics()
+    .then((metrics) => {
+      let categories = metrics.categories;
+      let categoryLabels = Object.keys(categories);
+      let categoryValues = Object.values(categories);
       renderBarChart(
         "categories-bar-chart",
         "Number of Patents Per Portfolio Category",
@@ -289,9 +292,9 @@ $(document).ready(function() {
         barColorPalette_Categories
       );
       
-      let centers = data.metrics.centers
-      let centerLabels = Object.keys(centers)
-      let centerValues = Object.values(centers)
+      let centers = metrics.centers;
+      let centerLabels = Object.keys(centers);
+      let centerValues = Object.values(centers);
       renderPieChart(
         "centers-pie-chart",
         "Number of Patents Per NASA Field Center",
@@ -299,7 +302,6 @@ $(document).ready(function() {
         centerValues,
         pieColorPalette_Centers
       );
-        
     })
     .catch(err => {
       console.log(err)
