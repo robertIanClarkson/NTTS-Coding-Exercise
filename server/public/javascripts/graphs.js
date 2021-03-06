@@ -39,6 +39,8 @@ const pieColorPalette_Centers = [
  * Description: gets patent metrics Object from the NTTP API via POST request to server
  * @return {Promise<Object>}  On resolved Promise, returns a 'metrics' Object with organized data gathered. Example: metrics.categories.
  *                            On rejected Promise, Error is thrown.
+ * 
+ * NOTE: POST request is used because we don't want to cache data. POST is also used so we can easily scale up if the client wants to request specific metrics in the future.
  */
 function getPatentMetrics() {
   return new Promise((resolve, reject) => {
