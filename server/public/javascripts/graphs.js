@@ -236,20 +236,20 @@ function renderPieChart(elementId, title, labels, values, palette) {
     type: 'pie',
     data: {
       datasets: [{
-        data: values,
-        backgroundColor: palette,
+        data: values, // @param values
+        backgroundColor: palette, // @param palette
         borderColor: "black",
         hoverBorderColor: "white",
         hoverBorderWidth: 4
       }],
-      labels: labels
+      labels: labels // @param labels
     },
     options: {
       responsive: true,
       onClick: pieClickEvent,
       title: {
         display: true,
-        text: title,
+        text: title, // @param title
         fontFamily: "'Raleway', sans-serif",
         fontColor: "white",
         fontSize: 36,
