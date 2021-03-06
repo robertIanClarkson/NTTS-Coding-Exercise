@@ -18,8 +18,6 @@ function getPatentMetrics(jsonData) {
   let categories = new Map();
   let centers = new Map();
 
-  console.log(jsonData.results[0].length)
-
   /* Collect metrics */
   for (i in jsonData.results) {
     let data = jsonData.results[i];
