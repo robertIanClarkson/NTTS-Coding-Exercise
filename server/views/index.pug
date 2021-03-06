@@ -1,43 +1,16 @@
 extends layout
 
 block content
+  // CONTENT
   .container-sm
     h1#title NTTP Patent Statistics
   .container-sm#graph
+    // Bar Chart Element
     canvas#categories-bar-chart
   hr
   .container-sm#graph
+    // Pie Chart Element
     canvas#centers-pie-chart
 
-  //- if categories
-  //-   p categories!
-  //-   each val, key in categories 
-  //-     p #{key} : #{val}
-
-  //-   canvas#categories-bar-chart(height='400px' )
-  //- p -----------------------------------------------------
-  //- if centers 
-  //-   p centers! 
-  //-   each val, key in centers 
-  //-     p #{key} : #{val}
-
-
-
-
-    //- each key, val in centers
-    //-   p #{key} : #{val}
-    //-   p ID: #{val[0]}
-    //-   p REFERENCE NUMBER: #{val[1]}
-    //-   p TITLE: #{val[2]}
-    //-   p ABSTRACT: #{val[3]}
-    //-   p CLIENT RECORD ID: #{val[4]}
-    //-   p CATEGORY: #{val[5]}
-    //-   p RELEASE TYPE: #{val[6]}
-    //-   p CATALOG NOTE: #{val[7]}
-    //-   p SW URL: #{val[8]}
-    //-   p CENTER: #{val[9]}
-    //-   p IMAGE URL: #{val[10]}
-    //-   p SUBCATEGORY: #{val[11]}
-    //-   p ----------------------------------------------------------      
-
-  script(src="/javascripts/graphs.js" val="hello")
+  // Link to Frontend JS - Graphs
+  script(src="/javascripts/graphs.js")
