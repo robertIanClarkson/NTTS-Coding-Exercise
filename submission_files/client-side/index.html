@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NTTS Coding Excercise</title>
+        <!-- JQuery CDN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Chart.js CDN-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Bootstrap CDN-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Google Fonts CDN "Raleway", "Rubik", "Roboto Condensed"-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&amp;family=Roboto+Condensed:wght@300&amp;family=Rubik:wght@300&amp;display=swap" rel="stylesheet">
+        <!-- project CSS stylesheet-->
+        <link rel="stylesheet" href="/stylesheets/style.css">
+    </head>
+    <body>
+        <!-- HEADER-->
+        <div class="container-sm">
+            <a href="https://technology.nasa.gov/" target="_blank">
+                <img class="img-fluid" src="images/t2.float.banner.png">
+            </a>
+        </div>
+        <!-- CONTENT-->
+        <div class="container-sm">
+            <h1 id="title">NTTP Patent Statistics</h1>
+        </div>
+        <div class="container-sm" id="graph">
+            <!-- Bar Chart Element-->
+            <canvas id="categories-bar-chart"></canvas>
+        </div>
+        <hr>
+        <div class="container-sm" id="graph">
+            <!-- Pie Chart Element-->
+            <canvas id="centers-pie-chart"></canvas>
+        </div>
+        <!-- Link to Frontend JS - Graphs-->
+        <script src="/javascripts/graphs.js"></script>
+        <!-- FOOTER-->
+        <hr>
+        <div class="container-sm" id="footer">
+            <h6 id="disclaimer">This is a coding assignment for Logyx LLC and has no assosciation with the NASA Technology Transfer Program</h6>
+            <h5 id="author">Robert Clarkson</h5>
+        </div>
+    </body>
+</html>
