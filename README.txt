@@ -36,7 +36,7 @@ Deployment
 		npm (6.14.8 was used in development)
 
 	Installing
-		Travel to the 'NTTS-Coding-Excercise' directory in your terminal
+		Travel to the 'NTTS-Coding-Exercise' directory in your terminal
 			$ cd NTTS-Coding-Exercise
 		
 		Enter the `server` directory
@@ -48,6 +48,8 @@ Deployment
 	Running
 		Start the server from inside the directory 'NTTS-Coding-Exercise/server'
 			$ npm start
+		
+		NOTE: If for any reason 'npm start' fails, Please use 'npm test' or 'node ./bin/www'
 
 Usage
 	Visit your localhost, port 3000
