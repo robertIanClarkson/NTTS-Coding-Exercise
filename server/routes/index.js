@@ -17,7 +17,6 @@ router.post('/metrics', function(req, res, next) {
   
   /* Get JSON data from NTTP API */
   https.get('https://technology-api.ndc.nasa.gov/api/patent', (apiRes) => {
-    try {
       let rawDataBuffer = '';
 
       /* A chunk of data has been received from API. */
@@ -27,14 +26,15 @@ router.post('/metrics', function(req, res, next) {
 
       /* Finished getting data from API */
       apiRes.on('end', () => {
-        let jsonData = JSON.parse(rawDataBuffer);
-        let metrics = jsonHandler.getPatentMetrics(jsonData);
-        res.send(metrics);
+        try {
+          let jsonData = JSON.parse(rawDataBuffer);
+          let metrics = jsonHandler.getPatentMetrics(jsonData);
+          res.send(metrics);
+        } catch(err) {
+          console.log("POST '/metric' Error: " + err);
+          res.sendStatus(500)
+        }
       });
-    } catch(err) {
-      console.log("POST '/metric' Error: " + err);
-      res.sendStatus(500)
-    }
   }).on("error", (err) => {
     console.log("POST '/metric' Error: " + err.message);
     res.sendStatus(502)

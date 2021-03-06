@@ -5,10 +5,21 @@
  */
 function getPatentMetrics(jsonData) {
 
+  /* Check JSON for correct format */
+  if(!('results' in jsonData)) {
+    throw "getPatentMetrics --> JSON data does not have 'results'";
+  } else if(jsonData.results.length == 0) {
+    throw "getPatentMetrics --> JSON data has 0 'results'";
+  } else if(jsonData.results[0].length != 12) {
+    throw "getPatentMetrics --> JSON record in wrong format";
+  }
+
   /* Create maps to store frequency */
   let categories = new Map();
   let centers = new Map();
-  
+
+  console.log(jsonData.results[0].length)
+
   /* Collect metrics */
   for (i in jsonData.results) {
     let data = jsonData.results[i];
