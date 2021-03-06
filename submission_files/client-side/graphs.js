@@ -39,6 +39,8 @@ const pieColorPalette_Centers = [
  * Description: gets patent metrics Object from the NTTP API via POST request to server
  * @return {Promise<Object>}  On resolved Promise, returns a 'metrics' Object with organized data gathered. Example: metrics.categories.
  *                            On rejected Promise, Error is thrown.
+ * 
+ * NOTE: POST request is used because we don't want to cache data. POST is also used so we can easily scale up if the client wants to request specific metrics in the future.
  */
 function getPatentMetrics() {
   return new Promise((resolve, reject) => {
@@ -48,11 +50,11 @@ function getPatentMetrics() {
         if(status == 'success') {
           resolve(data);
         } else {
-          reject(`Failed POST request for patent metrics: ${status}`);
+          reject("Failed POST request for patent metrics: " + status);
         }
       })
       .catch((err) => {
-        reject(`Failed POST request for patent metrics: ${err}`);
+        reject("Failed POST request for patent metrics: " + JSON.stringify(err));
       });
   });
 }
@@ -93,6 +95,16 @@ function renderBarChart(elementId, title, xLabel, yLabel, labels, values, palett
       }
     }
   };
+
+  /* Check that labels.length == values.length */
+  if(labels.length != values.length) {
+    throw "renderBarChart: labels length must be equal to values length"
+  }
+
+  /* Check if pallete size is big enough */
+  if(palette.length < labels.length + 2) {
+    throw "renderBarChart: color palette too small"  
+  }
 
   /* Set animation for Bar Chart to 2 seconds */
   Chart.defaults.global.animation.duration = 2000;
@@ -227,6 +239,16 @@ function renderPieChart(elementId, title, labels, values, palette) {
     }
   };
 
+  /* Check that labels.length == values.length */
+  if(labels.length != values.length) {
+    throw "renderPieChart: labels length must be equal to values length"
+  }
+
+  /* Check if pallete size is big enough */
+  if(palette.length != labels.length) {
+    throw "renderPieChart: color palette too small"  
+  }
+
   /* Set animation for Pie Chart to 4 seconds */
   Chart.defaults.global.animation.duration = 4000;
 
@@ -236,20 +258,20 @@ function renderPieChart(elementId, title, labels, values, palette) {
     type: 'pie',
     data: {
       datasets: [{
-        data: values,
-        backgroundColor: palette,
+        data: values, // @param values
+        backgroundColor: palette, // @param palette
         borderColor: "black",
         hoverBorderColor: "white",
         hoverBorderWidth: 4
       }],
-      labels: labels
+      labels: labels // @param labels
     },
     options: {
       responsive: true,
       onClick: pieClickEvent,
       title: {
         display: true,
-        text: title,
+        text: title, // @param title
         fontFamily: "'Raleway', sans-serif",
         fontColor: "white",
         fontSize: 36,
@@ -279,31 +301,54 @@ function renderPieChart(elementId, title, labels, values, palette) {
 $(document).ready(function() {
   getPatentMetrics()
     .then((metrics) => {
-      let categories = metrics.categories;
-      let categoryLabels = Object.keys(categories);
-      let categoryValues = Object.values(categories);
-      renderBarChart(
-        "categories-bar-chart",
-        "Number of Patents Per Portfolio Category",
-        "Category",
-        "Number of Patents",
-        categoryLabels,
-        categoryValues,
-        barColorPalette_Categories
-      );
+      try {
+        let categories = metrics.categories;
+        let categoryLabels = Object.keys(categories);
+        let categoryValues = Object.values(categories);
+        renderBarChart(
+          "categories-bar-chart",
+          "Number of Patents Per Portfolio Category",
+          "Category",
+          "Number of Patents",
+          categoryLabels,
+          categoryValues,
+          barColorPalette_Categories
+        );
+      } catch(err) {
+        let chartContainer = document.getElementById("categories-graph-container")
+        let dom = document.createElement("h3");
+        let error = document.createTextNode("Failed to render bar chart -> " + JSON.stringify(err));
+        dom.appendChild(error);
+        chartContainer.appendChild(dom)
+        console.log("Failed to render bar chart -> " + JSON.stringify(err))
+      }
       
-      let centers = metrics.centers;
-      let centerLabels = Object.keys(centers);
-      let centerValues = Object.values(centers);
-      renderPieChart(
-        "centers-pie-chart",
-        "Number of Patents Per NASA Field Center",
-        centerLabels,
-        centerValues,
-        pieColorPalette_Centers
-      );
+      try {
+        let centers = metrics.centers;
+        let centerLabels = Object.keys(centers);
+        let centerValues = Object.values(centers);
+        renderPieChart(
+          "centers-pie-chart",
+          "Number of Patents Per NASA Field Center",
+          centerLabels,
+          centerValues,
+          pieColorPalette_Centers
+        );
+      } catch(err) {
+        let chartContainer = document.getElementById("centers-graph-container")
+        let dom = document.createElement("h3");
+        let error = document.createTextNode("Failed to render pie chart -> " + JSON.stringify(err));
+        dom.appendChild(error);
+        chartContainer.appendChild(dom)
+        console.log("Failed to render pie chart -> " + JSON.stringify(err))
+      }
     })
     .catch(err => {
+      let chartContainer = document.getElementById("categories-graph-container")
+      let dom = document.createElement("h3");
+      let error = document.createTextNode(err);
+      dom.appendChild(error);
+      chartContainer.appendChild(dom)
       console.log(err)
     })
 });
